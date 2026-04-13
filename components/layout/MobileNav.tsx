@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Receipt, PlusCircle } from "lucide-react";
+import { LayoutDashboard, Receipt, PlusCircle, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface MobileNavProps {
@@ -47,6 +47,19 @@ export function MobileNav({ onAddExpense }: MobileNavProps) {
         >
           <Receipt className="h-5 w-5" />
           <span className="text-xs font-medium">Expenses</span>
+        </Link>
+
+        <Link
+          href="/export"
+          className={cn(
+            "flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-xl transition-colors",
+            pathname === "/export"
+              ? "text-primary-600"
+              : "text-gray-500 hover:text-gray-700"
+          )}
+        >
+          <Share2 className="h-5 w-5" />
+          <span className="text-xs font-medium">Export</span>
         </Link>
       </div>
     </nav>

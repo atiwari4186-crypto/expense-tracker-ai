@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { Share2, ArrowRight } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { SummaryCards } from "./SummaryCards";
 import { SpendingChart } from "./SpendingChart";
@@ -47,6 +49,23 @@ export function DashboardClient() {
 
         {/* Recent expenses */}
         <RecentExpenses expenses={expenses} />
+
+        {/* Export Hub callout */}
+        <Link
+          href="/export"
+          className="group flex items-center gap-4 rounded-2xl border border-primary-200 bg-gradient-to-r from-primary-50 to-violet-50 p-5 transition-shadow hover:shadow-md"
+        >
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-primary-600 text-white shadow-sm">
+            <Share2 className="h-5 w-5" />
+          </div>
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-gray-900">Export Hub</p>
+            <p className="text-xs text-gray-500 mt-0.5">
+              Email reports, sync to Google Sheets, schedule backups, and more
+            </p>
+          </div>
+          <ArrowRight className="h-4 w-4 text-primary-400 transition-transform group-hover:translate-x-1" />
+        </Link>
       </div>
     </AppShell>
   );
