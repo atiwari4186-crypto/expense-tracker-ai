@@ -1,14 +1,19 @@
 "use client";
 
+import { useState } from "react";
+import { Download } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { SummaryCards } from "./SummaryCards";
 import { SpendingChart } from "./SpendingChart";
 import { CategoryBreakdown } from "./CategoryBreakdown";
 import { RecentExpenses } from "./RecentExpenses";
 import { useExpenseContext } from "@/context/ExpenseContext";
+import { ExportDrawer } from "@/components/export/ExportDrawer";
+import { Button } from "@/components/ui/Button";
 
 export function DashboardClient() {
   const { expenses, stats, isLoaded } = useExpenseContext();
+  const [isExportOpen, setIsExportOpen] = useState(false);
 
   if (!isLoaded) {
     return (
@@ -24,7 +29,19 @@ export function DashboardClient() {
   }
 
   return (
+    <>
+      <ExportDrawer
+        isOpen={isExportOpen}
+        onClose={() => setIsExportOpen(false)}
+        expenses={expenses}
+      />
     <AppShell title="Dashboard" subtitle="Your financial overview">
+      <div className="flex justify-end mb-4">
+        <Button variant="outline" onClick={() => setIsExportOpen(true)}>
+          <Download className="h-4 w-4" />
+          Export Data
+        </Button>
+      </div>
       <div className="space-y-6">
         {/* Summary cards */}
         <SummaryCards
@@ -49,5 +66,6 @@ export function DashboardClient() {
         <RecentExpenses expenses={expenses} />
       </div>
     </AppShell>
+    </>
   );
 }
