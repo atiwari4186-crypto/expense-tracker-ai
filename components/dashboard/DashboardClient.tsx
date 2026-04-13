@@ -6,6 +6,7 @@ import { SpendingChart } from "./SpendingChart";
 import { CategoryBreakdown } from "./CategoryBreakdown";
 import { RecentExpenses } from "./RecentExpenses";
 import { useExpenseContext } from "@/context/ExpenseContext";
+import { exportToCSV } from "@/lib/export";
 
 export function DashboardClient() {
   const { expenses, stats, isLoaded } = useExpenseContext();
@@ -25,6 +26,14 @@ export function DashboardClient() {
 
   return (
     <AppShell title="Dashboard" subtitle="Your financial overview">
+      <div className="flex justify-end mb-2">
+        <button
+          onClick={() => exportToCSV(expenses)}
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors"
+        >
+          Export Data
+        </button>
+      </div>
       <div className="space-y-6">
         {/* Summary cards */}
         <SummaryCards
